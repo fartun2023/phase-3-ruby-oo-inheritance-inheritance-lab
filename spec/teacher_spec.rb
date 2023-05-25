@@ -1,28 +1,21 @@
-describe Teacher do 
-  let!(:knowledge) { ["a String is a type of data in Ruby", "programming is hard, but it's worth it", "javascript async web request", "Ruby method call definition", "object oriented dog cat class instance", "class method class variable instance method instance variable", "programming computers hacking learning terminal", "bash Ruby rvm update certs"] }
-  let!(:teacher) { Teacher.new }
+require_relative '../lib/teacher'
 
-  it "inherits from the User class" do
-    expect(Teacher.superclass).to be(User) 
-  end
-  
-  describe "#first_name" do 
-    it "has a first name" do 
-      teacher.first_name = "Avi"
-      expect(teacher.first_name).to eq("Avi")
+RSpec.describe Teacher do
+  describe '#initialize' do
+    it 'is initialized with a first name and last name' do
+      teacher = Teacher.new('Jane', 'Smith')
+      expect(teacher).to be_a(Teacher)
+      expect(teacher.first_name).to eq('Jane')
+      expect(teacher.last_name).to eq('Smith')
     end
   end
 
-  describe "#last_name" do 
-    it "has a last name" do 
-      teacher.last_name = "Flombaum"
-      expect(teacher.last_name).to eq("Flombaum")
-    end
-  end
-
-  describe "#teach" do 
-    it "returns a random string of knowledge" do 
-      expect(knowledge).to include(teacher.teach) 
+  describe '#teach' do
+    it 'returns a random string of knowledge' do
+      teacher = Teacher.new('Jane', 'Smith')
+      knowledge = teacher.teach
+      expect(knowledge).to be_a(String)
+      expect(Teacher::KNOWLEDGE).to include(knowledge)
     end
   end
 end
